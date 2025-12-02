@@ -60,25 +60,25 @@ class Snake:
                     # Up
                     self.coordinates.insert(
                         0,
-                        (self.coordinates[0][0] - 1, self.coordinates[0][1])
+                        (self.coordinates[0][0], self.coordinates[0][1] - 1)
                     )
                 case 'Q':
                     # Left
                     self.coordinates.insert(
                         0,
-                        (self.coordinates[0][0], self.coordinates[0][1] - 1)
+                        (self.coordinates[0][0] - 1, self.coordinates[0][1])
                     )
                 case 'S':
                     # Down
                     self.coordinates.insert(
                         0,
-                        (self.coordinates[0][0] + 1, self.coordinates[0][1])
+                        (self.coordinates[0][0], self.coordinates[0][1]  + 1)
                     )
                 case 'D':
                     # Right
                     self.coordinates.insert(
                         0,
-                        (self.coordinates[0][0], self.coordinates[0][1] + 1)
+                        (self.coordinates[0][0] + 1, self.coordinates[0][1])
                     )
                 case _:
                     self.coordinates.insert(1, last_tail)
