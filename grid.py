@@ -14,3 +14,29 @@ def createGrid(n, m, snake):
             else:
                 print('.', end='')       #print grass
         print('\n')
+        
+        
+def displayCircle(r,snake):
+    """
+    Display the grid as a circle
+    
+    Args:
+        r (int) : radius (min : 5) 
+    """
+    
+    n = 2 * r + 1
+    for i in range(n ):
+        for j in range(n):
+          
+       
+            dx = (j ) - r
+            dy = (i ) - r
+            distance = (dx**2 + dy**2)**0.5
+            if distance <= r - 0.5:
+                print('.', end='')
+            else:
+                print('▓', end='')
+        print('\n')
+    
+# def maze(m,n, snake):   #Si on a le temps car ça à l'air galère à faire, mais fun
+    

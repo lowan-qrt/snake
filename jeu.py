@@ -5,6 +5,17 @@ import snake
 import grid
 
 if __name__ == "__main__":
+    print('   _________         _________')
+    print('  /         \\       /         \\')
+    print(' /  /~~~~~\\  \\     /  /~~~~~\\  \\')
+    print(' |  |     |  |     |  |     |  |')
+    print(' |  |     |  |     |  |     |  |')
+    print(' |  |     |  |     |  |     |  |         /')
+    print(' |  |     |  |     |  |     |  |       //')
+    print('(o  o)    \  \_____/  /     \  \_____/ /')
+    print(' \__/      \         /       \        /')
+    print('  |         ~~~~~~~~~         ~~~~~~~~')
+    print('  ^')
     try:
         # Size of the grid
         size_x = 10
