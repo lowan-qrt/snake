@@ -2,12 +2,12 @@
 # On December 2025
 # Grid generator
 
-def displayGrid(n, m, snake):
+def createGrid(n, m, snake):
     grid = ''
     for i in range(n):
         for j in range(m):
-            if(j, i) in snake:
-                if(j,i) == snake[0]:
+            if (i, j) in snake:
+                if (i, j) == snake[0]:
                     print('■', end='')   #print head
                 else:
                     print('□', end='')   #print body
