@@ -5,6 +5,17 @@ import snake
 import grid
 
 if __name__ == "__main__":
+    print('   _________         _________')
+    print('  /         \\       /         \\')
+    print(' /  /~~~~~\\  \\     /  /~~~~~\\  \\')
+    print(' |  |     |  |     |  |     |  |')
+    print(' |  |     |  |     |  |     |  |')
+    print(' |  |     |  |     |  |     |  |         /')
+    print(' |  |     |  |     |  |     |  |       //')
+    print('(o  o)    \  \_____/  /     \  \_____/ /')
+    print(' \__/      \         /       \        /')
+    print('  |         ~~~~~~~~~         ~~~~~~~~')
+    print('  ^')
     try:
         # Size of the grid
         size_x = 10
@@ -24,4 +35,3 @@ if __name__ == "__main__":
             snake.move()
     except KeyboardInterrupt:
         print('\n\n\tFIN DU JEU\n')
->>>>>>> d642354b735792af3029c787e40634fa411d15ce
