@@ -5,17 +5,19 @@ import snake
 import grid
 
 if __name__ == "__main__":
-    print('   _________         _________')
-    print('  /         \\       /         \\')
-    print(' /  /~~~~~\\  \\     /  /~~~~~\\  \\')
-    print(' |  |     |  |     |  |     |  |')
-    print(' |  |     |  |     |  |     |  |')
-    print(' |  |     |  |     |  |     |  |         /')
-    print(' |  |     |  |     |  |     |  |       //')
-    print('(o  o)    \  \_____/  /     \  \_____/ /')
-    print(' \__/      \         /       \        /')
-    print('  |         ~~~~~~~~~         ~~~~~~~~')
-    print('  ^')
+    print(r'   _________         _________')
+    print(r'  /         \       /         \ ')
+    print(r' /  /~~~~~\  \     /  /~~~~~\  \ ')
+    print(r' |  |     |  |     |  |     |  |')
+    print(r' |  |     |  |     |  |     |  |')
+    print(r' |  |     |  |     |  |     |  |         /')
+    print(r' |  |     |  |     |  |     |  |       //')
+    print(r'(o  o)    \  \_____/  /     \  \_____/ /')
+    print(r' \__/      \         /       \        /')
+    print(r'  |         ~~~~~~~~~         ~~~~~~~~')
+    print(r'  ^')
+    print('\n\n\tWELCOME TO THE SNAKE GAME\n')
+    print('\n\n\tBy Lowan.Q and Nathan.M\n')
     try:
         # Size of the grid
         size_x = 10
@@ -29,7 +31,7 @@ if __name__ == "__main__":
 
         while running:
             # Update grid
-            grid.createGrid(size_x, size_y, snake.coordinates)
+            grid.displayGrid(size_x, size_y, snake.coordinates)
 
             # Ask to move
             snake.move()
