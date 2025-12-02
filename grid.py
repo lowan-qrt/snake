@@ -6,8 +6,8 @@ def createGrid(n, m, snake):
     grid = ''
     for i in range(n):
         for j in range(m):
-            if(i,j) in snake:
-                if(i,j) == snake[0]:
+            if (i, j) in snake:
+                if (i, j) == snake[0]:
                     print('■', end='')   #print head
                 else:
                     print('□', end='')   #print body
