@@ -25,7 +25,7 @@ if __name__ == "__main__":
         size_y = 10
 
         # Initialize snake
-        snake = snake.Snake(input('Saisir un pseudo : '))
+        snake = snake.Snake(input('Please, enter a pseudo: '))
         snake.initializePos(size_x, size_y)
 
         #Initialize apple
@@ -36,7 +36,7 @@ if __name__ == "__main__":
 
         while running:
             if(len(snake.coordinates) >= (size_x * size_y)):
-                print('\n\n\tFIN DU JEU BRAVO\n')
+                print('\n\n\tEND OF THE GAME, GG!\n')
                 break
                 
             # Update grid
@@ -51,4 +51,4 @@ if __name__ == "__main__":
             # Ask to move
             snake.move(size_x, size_y)
     except KeyboardInterrupt:
-        print('\n\n\tFIN DU JEU\n')
+        print('\n\n\tEND OF THE GAME\n')
