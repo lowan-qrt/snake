@@ -7,12 +7,11 @@ def displayGrid(n: int, m: int, snake: list, apple: tuple) -> None:
     Generate the game grid.
     
     Args:
-    n (int): X axe.
-    m (int): Y axe.
-    snake (list): The snake object.
-    apple (tuple): Coordinates of the apple.
+        n (int): X axe.
+        m (int): Y axe.
+        snake (list): The snake object.
+        apple (tuple): Coordinates of the apple.
     """
-    grid = ''
     for i in range(n):
         for j in range(m):
             if (j, i) in snake:
