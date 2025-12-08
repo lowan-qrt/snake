@@ -123,7 +123,7 @@ class Snake:
                         self.coordinates.append(last_tail)
                 case _:
                     self.coordinates.insert(1, last_tail)
-                    print('\n\tMouvement invalide !\n')
+                    print('\n\Invalid movement!\n')
             Snake.detectCollision(self, grid_x, grid_y)
             break
     
@@ -141,9 +141,9 @@ class Snake:
         """
         # Wall collisions
         if (self.coordinates[0][0] > grid_x - 1 or self.coordinates[0][0] < 0 or self.coordinates[0][1] < 0 or self.coordinates[0][1] > grid_y - 1):
-            print('\n\tVous avez perdu !')
+            print('\n\tYou lose!')
             raise KeyboardInterrupt
         # Body collisions
         elif (self.coordinates[0] in self.coordinates[1:]):
-            print('\n\tVous avez perdu !')
+            print('\n\tYou lose!')
             raise KeyboardInterrupt
