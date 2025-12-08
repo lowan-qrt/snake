@@ -12,17 +12,18 @@ class Snake:
         pseudo (str): The player's name.
         score (int): The player's current score.
     """
-    def __init__(self, pseudo):
+    def __init__(self, pseudo: str):
         self.coordinates = []
         self.pseudo = pseudo
         self.score = 0
         self.last_move = None
     
-    def initializePos(self, size_x, size_y):
+    def initializePos(self, size_x: int, size_y: int) -> None:
         """
         Initialize the initial snake's position.
 
         Args:
+            self: The object.
             size_x (int): Length of the grid.
             size_y (int): Width of the grid.
         
@@ -56,11 +57,11 @@ class Snake:
         else:
             self.last_move = 'D'
     
-    def grow(self):
+    def grow(self) -> None:
         """
         After eating an apple, the snake will grow
         Args:
-            None
+            self: The object.
         
         Returns:
             None
@@ -68,9 +69,15 @@ class Snake:
         self.coordinates.append(self.coordinates[-1])
         self.score = self.score +1
  
-    def move(self):
+    def move(self) -> None:
         """
         Move the snake by using Z Q S D keys.
+
+        Args:
+            self: The object.
+
+        Returns:
+            None
         """
         last_tail = self.coordinates.pop()
 
@@ -119,7 +126,16 @@ class Snake:
             Snake.detectCollision(self)
             break
     
-    def detectCollision(self):
+    def detectCollision(self) -> None:
+        """
+        Detect wall and body collisions.
+        
+        Args:
+            self: Description
+
+        Returns:
+            None
+        """
         # Wall collisions
         if (self.coordinates[0][0] > 9 or self.coordinates[0][0] < 0 or self.coordinates[0][1] < 0 or self.coordinates[0][1] > 9):
             print('\n\tVous avez perdu !')

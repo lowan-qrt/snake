@@ -49,7 +49,6 @@ if __name__ == "__main__":
                 snake.grow()
                 grid.displayGrid(size_x, size_y, snake.coordinates,apple.coordinates)
                 
-                
             # Ask to move
             snake.move()
     except KeyboardInterrupt:

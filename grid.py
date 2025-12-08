@@ -8,13 +8,13 @@ def displayGrid(n, m, snake, apple):
         for j in range(m):
             if (j, i) in snake:
                 if (j, i) == snake[0]:
-                    print('■', end='')   #print head
+                    print('■', end='')   # print head
                 else:
-                    print('□', end='')   #print body
+                    print('□', end='')   # print body
             elif (j,i) == apple:
-                print('@',end='')        #print apple
+                print('@',end='')        # print apple
             else:
-                print('.', end='')       #print grass
+                print('.', end='')       # print grass
         print('\n') 
 
 
