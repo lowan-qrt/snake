@@ -2,7 +2,16 @@
 # On December 2025
 # Grid generator
 
-def displayGrid(n, m, snake, apple): 
+def displayGrid(n: int, m: int, snake: list, apple: tuple) -> None:
+    """
+    Generate the game grid.
+    
+    Args:
+    n (int): X axe.
+    m (int): Y axe.
+    snake (list): The snake
+    :param apple: Description
+    """
     grid = ''
     for i in range(n):
         for j in range(m):
@@ -23,14 +32,13 @@ def displayCircle(r,snake):
     Display the grid as a circle
     
     Args:
-        r (int) : radius (min : 5) 
+        r (int) : radius (min : 5)
     """
     
     n = 2 * r + 1
     for i in range(n ):
         for j in range(n):
-          
-       
+
             dx = (j ) - r
             dy = (i ) - r
             distance = (dx**2 + dy**2)**0.5

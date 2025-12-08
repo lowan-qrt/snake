@@ -50,6 +50,6 @@ if __name__ == "__main__":
                 grid.displayGrid(size_x, size_y, snake.coordinates,apple.coordinates)
                 
             # Ask to move
-            snake.move()
+            snake.move(size_x, size_y)
     except KeyboardInterrupt:
         print('\n\n\tFIN DU JEU\n')

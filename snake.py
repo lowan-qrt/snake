@@ -69,11 +69,13 @@ class Snake:
         self.coordinates.append(self.coordinates[-1])
         self.score = self.score +1
  
-    def move(self) -> None:
+    def move(self, grid_x: int, grid_y: int) -> None:
         """
         Move the snake by using Z Q S D keys.
 
         Args:
+            grid_x (int): Length of the X axe.
+            grid_y (int): Length of the Y axe.
             self: The object.
 
         Returns:
@@ -123,21 +125,23 @@ class Snake:
                 case _:
                     self.coordinates.insert(1, last_tail)
                     print('\n\tMouvement invalide !\n')
-            Snake.detectCollision(self)
+            Snake.detectCollision(self, grid_x, grid_y)
             break
     
-    def detectCollision(self) -> None:
+    def detectCollision(self, grid_x: int, grid_y: int) -> None:
         """
         Detect wall and body collisions.
         
         Args:
-            self: Description
+            grid_x (int): Length of the X axe.
+            grid_y (int): Length of the Y axe.
+            self: The object.
 
         Returns:
             None
         """
         # Wall collisions
-        if (self.coordinates[0][0] > 9 or self.coordinates[0][0] < 0 or self.coordinates[0][1] < 0 or self.coordinates[0][1] > 9):
+        if (self.coordinates[0][0] > grid_x - 1 or self.coordinates[0][0] < 0 or self.coordinates[0][1] < 0 or self.coordinates[0][1] > grid_y - 1):
             print('\n\tVous avez perdu !')
             raise KeyboardInterrupt
         # Body collisions
