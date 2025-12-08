@@ -4,7 +4,6 @@
 import snake
 import grid
 import item
-import random
 
 if __name__ == "__main__":
     print(r'   _________         _________')
@@ -26,7 +25,7 @@ if __name__ == "__main__":
         size_y = 10
 
         # Initialize snake
-        snake = snake.Snake('Faker')
+        snake = snake.Snake(input('Saisir un pseudo : '))
         snake.initializePos(size_x, size_y)
 
         #Initialize apple
@@ -42,7 +41,7 @@ if __name__ == "__main__":
                 
             # Update grid
             grid.displayGrid(size_x, size_y, snake.coordinates,apple.coordinates)
-            print(snake.score)
+            print(f'\t// SCORE \\\\\n{snake.pseudo} : {snake.score} pts')
             
             if(apple.coordinates == snake.coordinates[0]):
                 apple.itemPos(size_x,size_y,snake.coordinates) 

@@ -45,7 +45,6 @@ class Snake:
         else:
             y_pos_body = y_pos_head
         self.coordinates.append((x_pos_body, y_pos_body))
-        print(self.coordinates)
 
         # Determine the first cancel move
         if self.coordinates[0][1] < self.coordinates[1][1]:
@@ -84,7 +83,7 @@ class Snake:
         last_tail = self.coordinates.pop()
 
         while True:
-            next_move = input('Quel est votre prochain mouvement ? [Z, Q, S, D] ').upper()
+            next_move = input(f'{self.pseudo}, quel est votre prochain mouvement ? [Z, Q, S, D] ').upper()
             match next_move:
                 case 'Z':
                     if self.last_move != 'S':
