@@ -9,8 +9,8 @@ def displayGrid(n: int, m: int, snake: list, apple: tuple) -> None:
     Args:
     n (int): X axe.
     m (int): Y axe.
-    snake (list): The snake
-    :param apple: Description
+    snake (list): The snake object.
+    apple (tuple): Coordinates of the apple.
     """
     grid = ''
     for i in range(n):

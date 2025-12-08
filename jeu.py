@@ -4,6 +4,7 @@
 import snake
 import grid
 import item
+from playsound3 import playsound
 
 if __name__ == "__main__":
     print(r'   _________         _________')
@@ -52,6 +53,7 @@ if __name__ == "__main__":
             if(apple.coordinates == snake.coordinates[0]):
                 apple.itemPos(size_x,size_y,snake.coordinates) 
                 snake.grow()
+                playsound("assets/eat_apple_sound_effect.mp3")
                 grid.displayGrid(size_x, size_y, snake.coordinates,apple.coordinates)
                 print(f'\t// SCORE \\\\\n{snake.pseudo} : {snake.score} pts')
                 
