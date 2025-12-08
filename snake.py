@@ -41,20 +41,19 @@ class Snake:
         else:
             y_pos_body = y_pos_head
         self.coordinates.append((x_pos_body, y_pos_body))
-        print(self.coordinates)
-
-        # Determine the first cancel move
-        if self.coordinates[0][1] < self.coordinates[1][1]:
-            self.last_move = 'Z'
-        elif self.coordinates[0][1] > self.coordinates[1][1]:
-            self.last_move = 'S'
-        elif self.coordinates[0][0] < self.coordinates[1][0]:
-            self.last_move = 'Q'
-        else:
-            self.last_move = 'D'
     
-    
-
+    def grow(self):
+        """
+        After eating an apple, the snake will grow
+        Args:
+            None
+        
+        Returns:
+            None
+        """
+        self.coordinates.append(self.coordinates[-1])
+        self.score = self.score +1
+ 
     def move(self):
         """
         Move the snake by using Z Q S D keys.

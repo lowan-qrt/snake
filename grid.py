@@ -2,7 +2,7 @@
 # On December 2025
 # Grid generator
 
-def displayGrid(n, m, snake):
+def displayGrid(n, m, snake, apple): 
     grid = ''
     for i in range(n):
         for j in range(m):
@@ -11,11 +11,13 @@ def displayGrid(n, m, snake):
                     print('■', end='')   #print head
                 else:
                     print('□', end='')   #print body
+            elif (j,i) == apple:
+                print('@',end='')        #print apple
             else:
                 print('.', end='')       #print grass
-        print('\n')
-        
-        
+        print('\n') 
+
+
 def displayCircle(r,snake):
     """
     Display the grid as a circle

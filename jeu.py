@@ -3,6 +3,8 @@
 # Game launcher
 import snake
 import grid
+import item
+import random
 
 if __name__ == "__main__":
     print(r'   _________         _________')
@@ -27,12 +29,27 @@ if __name__ == "__main__":
         snake = snake.Snake('Faker')
         snake.initializePos(size_x, size_y)
 
+        #Initialize apple
+        apple = item.Item('Apple')
+        apple.itemPos(size_x,size_y,snake.coordinates)
+
         running = True
 
         while running:
+            if(len(snake.coordinates) >= (size_x * size_y)):
+                print('\n\n\tFIN DU JEU BRAVO\n')
+                break
+                
             # Update grid
-            grid.displayGrid(size_x, size_y, snake.coordinates)
-
+            grid.displayGrid(size_x, size_y, snake.coordinates,apple.coordinates)
+            print(snake.score)
+            
+            if(apple.coordinates == snake.coordinates[0]):
+                apple.itemPos(size_x,size_y,snake.coordinates) 
+                snake.grow()
+                grid.displayGrid(size_x, size_y, snake.coordinates,apple.coordinates)
+                
+                
             # Ask to move
             snake.move()
     except KeyboardInterrupt:
