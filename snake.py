@@ -52,6 +52,8 @@ class Snake:
             self.last_move = 'Q'
         else:
             self.last_move = 'D'
+    
+    
 
     def move(self):
         """
@@ -101,4 +103,15 @@ class Snake:
                 case _:
                     self.coordinates.insert(1, last_tail)
                     print('\n\tMouvement invalide !\n')
+            Snake.detectCollision(self)
             break
+    
+    def detectCollision(self):
+        # Wall collisions
+        if (self.coordinates[0][0] > 9 or self.coordinates[0][0] < 0 or self.coordinates[0][1] < 0 or self.coordinates[0][1] > 9):
+            print('\n\tVous avez perdu !')
+            raise KeyboardInterrupt
+        # Body collisions
+        elif (self.coordinates[0] in self.coordinates[1:]):
+            print('\n\tVous avez perdu !')
+            raise KeyboardInterrupt
