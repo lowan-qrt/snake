@@ -40,7 +40,20 @@ class Snake:
         else:
             y_pos_body = y_pos_head
         self.coordinates.append((x_pos_body, y_pos_body))
+    
+    def grow(self):
+        """
+        After eating an apple, the snake will grow
 
+        Args:
+            None
+        
+        Returns:
+            None
+        """
+        self.coordinates.append(self.coordinates[-1])
+        self.score = self.score +1
+    
     def move(self):
         """
         Move the snake by using Z Q S D keys.
