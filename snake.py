@@ -9,14 +9,16 @@ class Snake:
 
     Attributes:
         coordinates (list (tuple)): List of the snake's (x, y) coordinates.
-        pseudo (str): The player's name.
+        pseudo (str): The player's pseudo.
         score (int): The player's current score.
+        lastMove (None): The last snake's move.
+        deathCause (str): Reason of death.
     """
-    def __init__(self, pseudo: str):
+    def __init__(self):
         self.coordinates = []
         self.pseudo = 'Snake'
         self.score = 0
-        self.last_move = None
+        self.lastMove = None
         self.deathCause = 'Abort Program'
     
     def initializePos(self, size_x: int, size_y: int) -> None:
@@ -32,14 +34,12 @@ class Snake:
             None
         """
         # Snake head
-        # Snake's head
         x_pos_head = [x_pos for x_pos in range(size_x)][random.randint(1, size_x - 2)]
         y_pos_head = [x_pos for x_pos in range(size_y)][random.randint(1, size_y - 2)]
         self.coordinates.append((x_pos_head, y_pos_head))
 
         # Snake body
         x_pos_body = x_pos_head + [-1, 0, 1][random.randint(0,1)]
-        # Snake's body
         x_pos_body = x_pos_head + [-1, 0, 1][random.randint(0,2)]
         if x_pos_body == x_pos_head:
             y_pos_body = y_pos_head + [-1, 1][random.randint(0,1)]
@@ -49,13 +49,13 @@ class Snake:
 
         # Determine the first cancel move
         if self.coordinates[0][1] < self.coordinates[1][1]:
-            self.last_move = 'Z'
+            self.lastMove = 'Z'
         elif self.coordinates[0][1] > self.coordinates[1][1]:
-            self.last_move = 'S'
+            self.lastMove = 'S'
         elif self.coordinates[0][0] < self.coordinates[1][0]:
-            self.last_move = 'Q'
+            self.lastMove = 'Q'
         else:
-            self.last_move = 'D'
+            self.lastMove = 'D'
     
     def grow(self) -> None:
         """
@@ -87,39 +87,39 @@ class Snake:
             next_move = input(f'{self.pseudo}, what\'s your next movement? [Z, Q, S, D] ').upper()
             match next_move:
                 case 'Z':
-                    if self.last_move != 'S':
+                    if self.lastMove != 'S':
                         self.coordinates.insert(
                             0,
                             (self.coordinates[0][0], self.coordinates[0][1] - 1)
                         )
-                        self.last_move = next_move
+                        self.lastMove = next_move
                     else:
                         self.coordinates.append(last_tail)
                 case 'Q':
-                    if self.last_move != 'D':
+                    if self.lastMove != 'D':
                         self.coordinates.insert(
                             0,
                             (self.coordinates[0][0] - 1, self.coordinates[0][1])
                         )
-                        self.last_move = next_move
+                        self.lastMove = next_move
                     else:
                         self.coordinates.append(last_tail)
                 case 'S':
-                    if self.last_move != 'Z':
+                    if self.lastMove != 'Z':
                         self.coordinates.insert(
                             0,
                             (self.coordinates[0][0], self.coordinates[0][1] + 1)
                         )
-                        self.last_move = next_move
+                        self.lastMove = next_move
                     else:
                         self.coordinates.append(last_tail)
                 case 'D':
-                    if self.last_move != 'Q':
+                    if self.lastMove != 'Q':
                         self.coordinates.insert(
                             0,
                             (self.coordinates[0][0] + 1, self.coordinates[0][1])
                         )
-                        self.last_move = next_move
+                        self.lastMove = next_move
                     else:
                         self.coordinates.append(last_tail)
                 case _:
