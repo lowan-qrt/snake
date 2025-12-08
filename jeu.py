@@ -4,7 +4,6 @@
 import snake
 import grid
 import item
-import random
 
 if __name__ == "__main__":
     print(r'   _________         _________')
@@ -29,9 +28,9 @@ if __name__ == "__main__":
         size_y = 10
 
         # Initialize snake
-        snake = snake.Snake('Snake')
-        playerName = input('Enter your name: ') or 'Snake'
+        snake = snake.Snake(input('Please, enter a pseudo: ') or 'Snake')
         snake.pseudo = playerName
+
         snake.initializePos(size_x, size_y)
 
         #Initialize apple
@@ -42,24 +41,22 @@ if __name__ == "__main__":
 
         while running:
             if(len(snake.coordinates) >= (size_x * size_y)):
-                print('\n\n\tFIN DU JEU BRAVO\n')
+                print('\n\n\tEND OF THE GAME, GG!\n')
                 break
                 
             # Update grid
             grid.displayGrid(size_x, size_y, snake.coordinates,apple.coordinates)
-            print(snake.score)
+            print(f'\t// SCORE \\\\\n{snake.pseudo} : {snake.score} pts')
             
             if(apple.coordinates == snake.coordinates[0]):
                 apple.itemPos(size_x,size_y,snake.coordinates) 
                 snake.grow()
                 grid.displayGrid(size_x, size_y, snake.coordinates,apple.coordinates)
                 
-                
             # Ask to move
-            snake.move()
+            snake.move(size_x, size_y)
     except KeyboardInterrupt:
         print('\n\n\t'+snake.deathCause)
-        print('\n\n\tFIN DU JEU\n')
+        print('\n\n\tEND OF THE GAME\n')
         score = snake.pseudo+ ': grid size: '+str(size_x)+' x '+str(size_y)+ ' score: '+str(snake.score) + ' Death by : '+snake.deathCause+'\n'
         highScore.write(score)
-

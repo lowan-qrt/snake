@@ -12,18 +12,19 @@ class Snake:
         pseudo (str): The player's name.
         score (int): The player's current score.
     """
-    def __init__(self, pseudo):
+    def __init__(self, pseudo: str):
         self.coordinates = []
-        self.pseudo = pseudo
+        self.pseudo = 'Snake'
         self.score = 0
         self.last_move = None
         self.deathCause = 'Abort Program'
     
-    def initializePos(self, size_x, size_y):
+    def initializePos(self, size_x: int, size_y: int) -> None:
         """
         Initialize the initial snake's position.
 
         Args:
+            self: The object.
             size_x (int): Length of the grid.
             size_y (int): Width of the grid.
         
@@ -45,7 +46,6 @@ class Snake:
         else:
             y_pos_body = y_pos_head
         self.coordinates.append((x_pos_body, y_pos_body))
-        print(self.coordinates)
 
         # Determine the first cancel move
         if self.coordinates[0][1] < self.coordinates[1][1]:
@@ -57,11 +57,11 @@ class Snake:
         else:
             self.last_move = 'D'
     
-    def grow(self):
+    def grow(self) -> None:
         """
         After eating an apple, the snake will grow
         Args:
-            None
+            self: The object.
         
         Returns:
             None
@@ -69,14 +69,22 @@ class Snake:
         self.coordinates.append(self.coordinates[-1])
         self.score = self.score + 1
  
-    def move(self):
+    def move(self, grid_x: int, grid_y: int) -> None:
         """
         Move the snake by using Z Q S D keys.
+
+        Args:
+            grid_x (int): Length of the X axe.
+            grid_y (int): Length of the Y axe.
+            self: The object.
+
+        Returns:
+            None
         """
         last_tail = self.coordinates.pop()
 
         while True:
-            next_move = input('Quel est votre prochain mouvement ? [Z, Q, S, D] ').upper()
+            next_move = input(f'{self.pseudo}, what\'s your next movement? [Z, Q, S, D] ').upper()
             match next_move:
                 case 'Z':
                     if self.last_move != 'S':
@@ -116,18 +124,28 @@ class Snake:
                         self.coordinates.append(last_tail)
                 case _:
                     self.coordinates.insert(1, last_tail)
-                    print('\n\tMouvement invalide !\n')
-            Snake.detectCollision(self)
+                    print('\n\Invalid movement!\n')
+            Snake.detectCollision(self, grid_x, grid_y)
             break
     
-    def detectCollision(self):
+    def detectCollision(self, grid_x: int, grid_y: int) -> None:
+        """
+        Detect wall and body collisions.
+        
+        Args:
+            grid_x (int): Length of the X axe.
+            grid_y (int): Length of the Y axe.
+            self: The object.
+
+        Returns:
+            None
+        """
         # Wall collisions
-        if (self.coordinates[0][0] > 9 or self.coordinates[0][0] < 0 or self.coordinates[0][1] < 0 or self.coordinates[0][1] > 9):
-            print('\n\tVous avez perdu !')
-            self.deathCause = 'The snake eat the wall'
+        if (self.coordinates[0][0] > grid_x - 1 or self.coordinates[0][0] < 0 or self.coordinates[0][1] < 0 or self.coordinates[0][1] > grid_y - 1):
+            print('\n\tYou lose!')
             raise KeyboardInterrupt
         # Body collisions
         elif (self.coordinates[0] in self.coordinates[1:]):
-            print('\n\tVous avez perdu !')
+            print('\n\tYou lose!')
             self.deathCause = 'The snake eat itself'
             raise KeyboardInterrupt
