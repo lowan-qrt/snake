@@ -17,6 +17,7 @@ class Snake:
         self.pseudo = pseudo
         self.score = 0
         self.last_move = None
+        self.deathCause = 'Abort Program'
     
     def initializePos(self, size_x, size_y):
         """
@@ -66,7 +67,7 @@ class Snake:
             None
         """
         self.coordinates.append(self.coordinates[-1])
-        self.score = self.score +1
+        self.score = self.score + 1
  
     def move(self):
         """
@@ -123,8 +124,10 @@ class Snake:
         # Wall collisions
         if (self.coordinates[0][0] > 9 or self.coordinates[0][0] < 0 or self.coordinates[0][1] < 0 or self.coordinates[0][1] > 9):
             print('\n\tVous avez perdu !')
+            self.deathCause = 'The snake eat the wall'
             raise KeyboardInterrupt
         # Body collisions
         elif (self.coordinates[0] in self.coordinates[1:]):
             print('\n\tVous avez perdu !')
+            self.deathCause = 'The snake eat itself'
             raise KeyboardInterrupt

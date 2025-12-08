@@ -21,16 +21,21 @@ if __name__ == "__main__":
     print('\n\n\tWELCOME TO THE SNAKE GAME\n')
     print('\n\n\tBy Lowan Q. and Nathan M.\n')
     try:
+        
+        highScore = open('highscore.txt','a')
+        
         # Size of the grid
         size_x = 10
         size_y = 10
 
         # Initialize snake
-        snake = snake.Snake('Faker')
+        snake = snake.Snake('Snake')
+        playerName = input('Enter your name: ') or 'Snake'
+        snake.pseudo = playerName
         snake.initializePos(size_x, size_y)
 
         #Initialize apple
-        apple = item.Item('Apple')
+        apple = item.Item('apple')
         apple.itemPos(size_x,size_y,snake.coordinates)
 
         running = True
@@ -53,4 +58,8 @@ if __name__ == "__main__":
             # Ask to move
             snake.move()
     except KeyboardInterrupt:
+        print('\n\n\t'+snake.deathCause)
         print('\n\n\tFIN DU JEU\n')
+        score = snake.pseudo+ ': grid size: '+str(size_x)+' x '+str(size_y)+ ' score: '+str(snake.score) + ' Death by : '+snake.deathCause+'\n'
+        highScore.write(score)
+
