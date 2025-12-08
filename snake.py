@@ -143,6 +143,7 @@ class Snake:
         # Wall collisions
         if (self.coordinates[0][0] > grid_x - 1 or self.coordinates[0][0] < 0 or self.coordinates[0][1] < 0 or self.coordinates[0][1] > grid_y - 1):
             print('\n\tYou lose!')
+            self.deathCause = 'The snake eat the wall'
             raise KeyboardInterrupt
         # Body collisions
         elif (self.coordinates[0] in self.coordinates[1:]):

@@ -28,8 +28,9 @@ if __name__ == "__main__":
         size_y = 10
 
         # Initialize snake
-        snake = snake.Snake(input('Please, enter a pseudo: ') or 'Snake')
-        snake.pseudo = playerName
+        snake = snake.Snake('Snake')
+        # snake = snake.Snake(input('Please, enter a pseudo: ') or 'Snake')
+        playerName = input('Enter your name: ') or 'Snake'
 
         snake.initializePos(size_x, size_y)
 
@@ -52,6 +53,7 @@ if __name__ == "__main__":
                 apple.itemPos(size_x,size_y,snake.coordinates) 
                 snake.grow()
                 grid.displayGrid(size_x, size_y, snake.coordinates,apple.coordinates)
+                print(f'\t// SCORE \\\\\n{snake.pseudo} : {snake.score} pts')
                 
             # Ask to move
             snake.move(size_x, size_y)
