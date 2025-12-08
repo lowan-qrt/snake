@@ -19,7 +19,7 @@ if __name__ == "__main__":
     print(r'  |         ~~~~~~~~~         ~~~~~~~~')
     print(r'  ^')
     print('\n\n\tWELCOME TO THE SNAKE GAME\n')
-    print('\n\n\tBy Lowan.Q and Nathan.M\n')
+    print('\n\n\tBy Lowan Q. and Nathan M.\n')
     try:
         # Size of the grid
         size_x = 10

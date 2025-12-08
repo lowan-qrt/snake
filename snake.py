@@ -16,6 +16,7 @@ class Snake:
         self.coordinates = []
         self.pseudo = pseudo
         self.score = 0
+        self.last_move = None
     
     def initializePos(self, size_x, size_y):
         """
@@ -28,13 +29,13 @@ class Snake:
         Returns:
             None
         """
-        # Snake head
+        # Snake's head
         x_pos_head = [x_pos for x_pos in range(size_x)][random.randint(1, size_x - 2)]
         y_pos_head = [x_pos for x_pos in range(size_y)][random.randint(1, size_y - 2)]
         self.coordinates.append((x_pos_head, y_pos_head))
 
-        # Snake body
-        x_pos_body = x_pos_head + [-1, 0, 1][random.randint(0,1)]
+        # Snake's body
+        x_pos_body = x_pos_head + [-1, 0, 1][random.randint(0,2)]
         if x_pos_body == x_pos_head:
             y_pos_body = y_pos_head + [-1, 1][random.randint(0,1)]
         else:
@@ -44,7 +45,6 @@ class Snake:
     def grow(self):
         """
         After eating an apple, the snake will grow
-
         Args:
             None
         
@@ -57,12 +57,6 @@ class Snake:
     def move(self):
         """
         Move the snake by using Z Q S D keys.
-
-        Args:
-            None
-        
-        Returns:
-            None
         """
         last_tail = self.coordinates.pop()
 
@@ -70,29 +64,41 @@ class Snake:
             next_move = input('Quel est votre prochain mouvement ? [Z, Q, S, D] ').upper()
             match next_move:
                 case 'Z':
-                    # Up
-                    self.coordinates.insert(
-                        0,
-                        (self.coordinates[0][0], self.coordinates[0][1] - 1)
-                    )
+                    if self.last_move != 'S':
+                        self.coordinates.insert(
+                            0,
+                            (self.coordinates[0][0], self.coordinates[0][1] - 1)
+                        )
+                        self.last_move = next_move
+                    else:
+                        self.coordinates.append(last_tail)
                 case 'Q':
-                    # Left
-                    self.coordinates.insert(
-                        0,
-                        (self.coordinates[0][0] - 1, self.coordinates[0][1])
-                    )
+                    if self.last_move != 'D':
+                        self.coordinates.insert(
+                            0,
+                            (self.coordinates[0][0] - 1, self.coordinates[0][1])
+                        )
+                        self.last_move = next_move
+                    else:
+                        self.coordinates.append(last_tail)
                 case 'S':
-                    # Down
-                    self.coordinates.insert(
-                        0,
-                        (self.coordinates[0][0], self.coordinates[0][1]  + 1)
-                    )
+                    if self.last_move != 'Z':
+                        self.coordinates.insert(
+                            0,
+                            (self.coordinates[0][0], self.coordinates[0][1] + 1)
+                        )
+                        self.last_move = next_move
+                    else:
+                        self.coordinates.append(last_tail)
                 case 'D':
-                    # Right
-                    self.coordinates.insert(
-                        0,
-                        (self.coordinates[0][0] + 1, self.coordinates[0][1])
-                    )
+                    if self.last_move != 'Q':
+                        self.coordinates.insert(
+                            0,
+                            (self.coordinates[0][0] + 1, self.coordinates[0][1])
+                        )
+                        self.last_move = next_move
+                    else:
+                        self.coordinates.append(last_tail)
                 case _:
                     self.coordinates.insert(1, last_tail)
                     print('\n\tMouvement invalide !\n')
