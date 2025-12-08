@@ -29,11 +29,14 @@ class Snake:
         Returns:
             None
         """
+        # Snake head
         # Snake's head
         x_pos_head = [x_pos for x_pos in range(size_x)][random.randint(1, size_x - 2)]
         y_pos_head = [x_pos for x_pos in range(size_y)][random.randint(1, size_y - 2)]
         self.coordinates.append((x_pos_head, y_pos_head))
 
+        # Snake body
+        x_pos_body = x_pos_head + [-1, 0, 1][random.randint(0,1)]
         # Snake's body
         x_pos_body = x_pos_head + [-1, 0, 1][random.randint(0,2)]
         if x_pos_body == x_pos_head:
@@ -41,6 +44,17 @@ class Snake:
         else:
             y_pos_body = y_pos_head
         self.coordinates.append((x_pos_body, y_pos_body))
+        print(self.coordinates)
+
+        # Determine the first cancel move
+        if self.coordinates[0][1] < self.coordinates[1][1]:
+            self.last_move = 'Z'
+        elif self.coordinates[0][1] > self.coordinates[1][1]:
+            self.last_move = 'S'
+        elif self.coordinates[0][0] < self.coordinates[1][0]:
+            self.last_move = 'Q'
+        else:
+            self.last_move = 'D'
     
     def grow(self):
         """
