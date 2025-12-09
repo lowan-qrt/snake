@@ -12,8 +12,8 @@ def displayGrid(n: int, m: int, snake: list, apple: tuple) -> None:
         snake (list): The snake object.
         apple (tuple): Coordinates of the apple.
     """
-    for i in range(n):
-        for j in range(m):
+    for i in range(m):
+        for j in range(n):
             if (j, i) in snake:
                 if (j, i) == snake[0]:
                     print('■', end='')   # print head

@@ -1,0 +1,13 @@
+The game Snake has a long and interesting history. Its roots trace back to the 1970s. The original concept was created as an arcade game called "Blockade" in 1976 by Gremlin. In Blockade, players controlled a line that grew in length, and the goal was to avoid hitting walls or the opponent's line.
+
+In the 1980s, the game evolved and appeared on early personal computers and home consoles under various names, including Worm, Nibbler, and Snake Byte. These versions introduced the concept of collecting items to grow longer and often added obstacles or mazes.
+
+Snake became widely popular in the late 1990s when Nokia pre-installed a version of the game on its mobile phones. This version, simply called "Snake," allowed players to control a snake that grew longer as it ate dots, with the game ending if the snake collided with itself or the screen border. Its accessibility and simple mechanics made it a worldwide phenomenon, laying the groundwork for modern mobile gaming.
+
+Since then, Snake has inspired countless variations and adaptations on multiple platforms, from web browsers to gaming consoles, maintaining its reputation as an iconic and enduring video game.
+
+Sources:
+
+1. Wolf, Mark J.P. (2008). "The Video Game Explosion: A History from PONG to PlayStation and Beyond." Greenwood Press.
+2. Kent, Steven L. (2001). "The Ultimate History of Video Games." Three Rivers Press.
+3. [https://en.wikipedia.org/wiki/Snake_(video_game_genre)](https://en.wikipedia.org/wiki/Snake_%28video_game_genre%29)

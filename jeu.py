@@ -6,6 +6,7 @@ import snake
 import grid
 import item
 from playsound3 import playsound
+import menu
 
 if __name__ == "__main__":
     print(r'   _________         _________')
@@ -20,11 +21,13 @@ if __name__ == "__main__":
     print(r'  |         ~~~~~~~~~         ~~~~~~~~')
     print(r'  ^')
     print('\n\n\tWELCOME TO THE SNAKE GAME\n')
-    print('\n\n\tBy Lowan Q. and Nathan M.\n')
+    print('\n\tBy Lowan Q. and Nathan M.\n')
+
+    menu()
 
     try:
         # Open or reload last scores
-        highScore = open('highscore.txt', 'a')
+        highScore = open('assets/highscore.txt', 'a')
         
         # Size of the grid
         size_x = 10
