@@ -5,16 +5,14 @@
 import snake as sn
 import grid
 import item
-
 import usualFunction as f
 import random
 import os
-
 from playsound3 import playsound
 import menu
 
-
 if __name__ == "__main__":
+    os.system('cls')
     print(r'   _________         _________')
     print(r'  /         \       /         \ ')
     print(r' /  /~~~~~\  \     /  /~~~~~\  \ ')
@@ -28,8 +26,6 @@ if __name__ == "__main__":
     print(r'  ^')
     print('\n\n\tWELCOME TO THE SNAKE GAME\n')
     print('\n\tBy Lowan Q. and Nathan M.\n')
-
-
         
     play = True
     while play:
@@ -46,10 +42,9 @@ if __name__ == "__main__":
                 size_y = 10
                 
                 # Initialize snake
-                
                 snake = sn.Snake()
                 try:
-                    snake.pseudo = f.validInput('str',1,100,'Enter your name','Snake')
+                    snake.pseudo = input('\nEnter your name: ')
                 except KeyboardInterrupt:
                     continue
                 snake.initializePos(size_x, size_y)
@@ -104,14 +99,7 @@ if __name__ == "__main__":
                             print(f'\t// SCORE \\\\\n{snake.pseudo} : {snake.score} pts')
                             
                         scoreMultiplier = 1 + f.occOfItem(listOfItem, 'bomb')/10
-                    
-                    # Ask to move
-                    # fps = 1
-                    # fps += 1
-                    # print(fps%60)
-                    # print(fps)
-                    # if fps % 60 == 0:
-                    
+
                     os.system('cls')
                     snake.move2(size_x, size_y)
                
