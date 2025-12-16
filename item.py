@@ -11,12 +11,14 @@ class Item:
     Attributes:
         coordinates (tuple) : the item coordinates
         name (str): The item's name.
+        sprite (str): The item' sprite on the grid
     """
-    def __init__(self, name):
+    def __init__(self, name,sprite):
         self.coordinates = (-1,-1)
         self.name = name
+        self.sprite = sprite
     
-    def itemPos(self, size_x, size_y,snakeCoordinates):
+    def itemPos(self, size_x, size_y,snakeCoordinates, itemsCoordinates):
         
         """
         Initialize the item coordinates
@@ -32,10 +34,10 @@ class Item:
       
         x_pos = random.randint(0,size_x - 1)
         y_pos = random.randint(0,size_y - 1)
-        while ((x_pos,y_pos) in snakeCoordinates):
+        while ((x_pos,y_pos) in snakeCoordinates or (x_pos,y_pos) in itemsCoordinates):
             x_pos = random.randint(0,size_x-1)
             y_pos = random.randint(0,size_y-1)
            
-        self.coordinates = ((x_pos, y_pos))
+        self.coordinates = (x_pos, y_pos)
         
      

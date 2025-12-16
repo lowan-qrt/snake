@@ -2,6 +2,7 @@
 # On December 2025
 # Snake configuration file
 import random
+import msvcrt as m
 
 class Snake:
     """
@@ -57,17 +58,28 @@ class Snake:
         else:
             self.last_move = 'D'
     
-    def grow(self) -> None:
+    def eat(self,itemName:str,scoreMultiplier:float) -> None:
         """
-        After eating an apple, the snake will grow
+        After eating an item, the snake will grow if it's an apple or die if it's a bomb
         Args:
             self: The object.
+            itemName : The item the snake has just eat
         
         Returns:
             None
         """
-        self.coordinates.append(self.coordinates[-1])
-        self.score = self.score + 1
+        
+        match(itemName.name):
+            case 'apple':
+                self.coordinates.append(self.coordinates[-1])
+                self.score = self.score + 1 * scoreMultiplier
+                              
+            case 'bomb':
+                print('\n\tYou lose!')
+                self.deathCause = 'The snake eat a bomb'
+                raise KeyboardInterrupt
+            
+                
  
     def move(self, grid_x: int, grid_y: int) -> None:
         """
@@ -127,6 +139,75 @@ class Snake:
                     print('\n\Invalid movement!\n')
             Snake.detectCollision(self, grid_x, grid_y)
             break
+            
+    def move2(self, grid_x: int, grid_y: int) -> None:
+        """
+        Move the snake by using Z Q S D keys.
+
+        Args:
+            grid_x (int): Length of the X axe.
+            grid_y (int): Length of the Y axe.
+            self: The object.
+
+        Returns:
+            None
+        """
+        last_tail = self.coordinates.pop()
+        while True:
+
+            next_move = ""
+            if(m.kbhit()):
+                key = m.getch().decode().lower()
+                if key == 'z' and self.last_move != 'S':
+                    next_move = 'Z'
+                elif key == 'q' and self.last_move != 'D':
+                    next_move = 'Q'
+                elif key == 's' and self.last_move != 'Z':
+                    next_move = 'S'
+                elif key == 'd' and self.last_move != 'Q':
+                    next_move = 'D'
+            match next_move:
+                case 'Z':
+                    if self.last_move != 'S':
+                        self.coordinates.insert(
+                            0,
+                            (self.coordinates[0][0], self.coordinates[0][1] - 1)
+                        )
+                        self.last_move = next_move
+                    else:
+                        self.coordinates.append(last_tail)
+                case 'Q':
+                    if self.last_move != 'D':
+                        self.coordinates.insert(
+                            0,
+                            (self.coordinates[0][0] - 1, self.coordinates[0][1])
+                        )
+                        self.last_move = next_move
+                    else:
+                        self.coordinates.append(last_tail)
+                case 'S':
+                    if self.last_move != 'Z':
+                        self.coordinates.insert(
+                            0,
+                            (self.coordinates[0][0], self.coordinates[0][1] + 1)
+                        )
+                        self.last_move = next_move
+                    else:
+                        self.coordinates.append(last_tail)
+                case 'D':
+                    if self.last_move != 'Q':
+                        self.coordinates.insert(
+                            0,
+                            (self.coordinates[0][0] + 1, self.coordinates[0][1])
+                        )
+                        self.last_move = next_move
+                    else:
+                        self.coordinates.append(last_tail)
+                case _:
+                    self.coordinates.insert(1, last_tail)
+                    print('\n\Invalid movement!\n')
+            Snake.detectCollision(self, grid_x, grid_y)
+            break
     
     def detectCollision(self, grid_x: int, grid_y: int) -> None:
         """
@@ -141,6 +222,23 @@ class Snake:
             None
         """
         # Wall collisions
+        
+        
+        warp = True
+        if(warp):
+            print(self.coordinates[0])
+            if (self.coordinates[0][0] > grid_x - 1):
+                (self.coordinates[0]) = (0,self.coordinates[0][1])
+                
+            elif (self.coordinates[0][0] < 0):
+                (self.coordinates[0]) = (grid_x-1,self.coordinates[0][1])
+                
+            elif (self.coordinates[0][1] > grid_y - 1):
+                (self.coordinates[0]) = (self.coordinates[0][0],0)
+                
+            elif (self.coordinates[0][1] < 0):
+                (self.coordinates[0]) = (self.coordinates[0][0],grid_y - 1)
+        
         if (self.coordinates[0][0] > grid_x - 1 or self.coordinates[0][0] < 0 or self.coordinates[0][1] < 0 or self.coordinates[0][1] > grid_y - 1):
             print('\n\tYou lose!')
             self.deathCause = 'The snake eat the wall'

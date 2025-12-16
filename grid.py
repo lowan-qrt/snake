@@ -2,7 +2,7 @@
 # On December 2025
 # Grid generator
 
-def displayGrid(n: int, m: int, snake: list, apple: tuple) -> None:
+def displayGrid(n: int, m: int, snake: list, listOfItem) -> None:
     """
     Generate the game grid.
     
@@ -10,20 +10,29 @@ def displayGrid(n: int, m: int, snake: list, apple: tuple) -> None:
     n (int): X axe.
     m (int): Y axe.
     snake (list): The snake
-    :param apple: Description
     """
     grid = ''
+    
     for i in range(n):
-        for j in range(m):
+        for j in range(m):          
             if (j, i) in snake:
                 if (j, i) == snake[0]:
                     print('■', end='')   # print head
                 else:
                     print('□', end='')   # print body
-            elif (j,i) == apple:
-                print('@',end='')        # print apple
             else:
-                print('.', end='')       # print grass
+                for item in listOfItem:
+                    if (j,i) == item.coordinates:
+                        match(item.name):
+                            case 'apple':
+                                 print(item.sprite,end='')  # print apple
+                                 break
+                            case 'bomb':
+                                print(item.sprite,end='')   #print bomb
+                                break    
+                    elif item == listOfItem[-1]:
+                        print('.', end='')                  # print grass    
+                
         print('\n') 
 
 
