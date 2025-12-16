@@ -3,6 +3,7 @@
 # Snake configuration file
 import random
 import msvcrt as m
+from playsound3 import playsound
 
 class Snake:
     """
@@ -71,10 +72,12 @@ class Snake:
         
         match(itemName.name):
             case 'apple':
+                playsound("assets/eat_apple_sound_effect.mp3")
                 self.coordinates.append(self.coordinates[-1])
                 self.score = self.score + 1 * scoreMultiplier
                               
             case 'bomb':
+                playsound("assets/boom.mp3")
                 print('\n\tYou lose!')
                 self.deathCause = 'The snake eat a bomb'
                 raise KeyboardInterrupt
@@ -155,7 +158,7 @@ class Snake:
         last_tail = self.coordinates.pop()
         while True:
 
-            next_move = ""
+            next_move = self.lastMove
             if(m.kbhit()):
                 key = m.getch().decode().lower()
                 if key == 'z' and self.lastMove != 'S':
@@ -205,7 +208,6 @@ class Snake:
                         self.coordinates.append(last_tail)
                 case _:
                     self.coordinates.insert(1, last_tail)
-                    print('\n\Invalid movement!\n')
             Snake.detectCollision(self, grid_x, grid_y)
             break
     
@@ -226,7 +228,6 @@ class Snake:
         
         warp = True
         if(warp):
-            print(self.coordinates[0])
             if (self.coordinates[0][0] > grid_x - 1):
                 (self.coordinates[0]) = (0,self.coordinates[0][1])
                 

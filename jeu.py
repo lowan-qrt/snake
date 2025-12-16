@@ -12,6 +12,7 @@ import os
 
 from playsound3 import playsound
 import menu
+import time
 
 
 if __name__ == "__main__":
@@ -45,6 +46,8 @@ if __name__ == "__main__":
                 size_x = 10
                 size_y = 10
                 
+                
+                
                 # Initialize snake
                 
                 snake = sn.Snake()
@@ -68,18 +71,7 @@ if __name__ == "__main__":
                 #Run the game
                 running = True
                 while running:
-                    print(f'\t// DEBUG \\\\')
-                    print('snakeName:',snake.pseudo)
-                    print('probBomb:',probBomb)
-                    print('items coordinates and items sprites: ')
-                    print(listOfItem)
-                    for itemOnGrid in listOfItem:
-                        print(itemOnGrid.coordinates,itemOnGrid.sprite,itemOnGrid.name)
-                    print('nb bomb : ', f.occOfItem(listOfItem, 'bomb'))
-                    print('nb score multiplier:',scoreMultiplier)
-                    print(f'\t\\\\ DEBUG //\n')  
-                    
-                    
+                                  
                     # Winning
                     if(len(snake.coordinates) >= (size_x * size_y)):
                         print('\n\n\tYOU WIN, GG!\n')
@@ -96,28 +88,25 @@ if __name__ == "__main__":
                         if(itemOnGrid.coordinates == snake.coordinates[0]):
                             apple.itemPos(size_x,size_y,snake.coordinates,listOfItem) 
                             snake.eat(itemOnGrid,scoreMultiplier)
-                            playsound("assets/eat_apple_sound_effect.mp3")
+                
                             if((random.randint(probBomb,100) == 100)):
                                 listOfItem.append(item.Item('bomb','B'))
                                 listOfItem[-1].itemPos(size_x,size_y,snake.coordinates,listOfItem)
+                            os.system('cls')
                             grid.displayGrid(size_x, size_y, snake.coordinates,listOfItem)
                             print(f'\t// SCORE \\\\\n{snake.pseudo} : {snake.score} pts')
                             
                         scoreMultiplier = 1 + f.occOfItem(listOfItem, 'bomb')/10
+                   
+
                     
-                    # Ask to move
-                    # fps = 1
-                    # fps += 1
-                    # print(fps%60)
-                    # print(fps)
-                    # if fps % 60 == 0:
-                    
+                    time.sleep(0.1)
                     os.system('cls')
                     snake.move2(size_x, size_y)
                
             except KeyboardInterrupt:
                 # Save scores
-                score = snake.pseudo + ': grid size: ' + str(size_x) + ' x ' + str(size_y) + ' score: ' + str(snake.score) + ' Death by : ' + snake.deathCause + '\n'
+                score = snake.pseudo + ': grid size: ' + str(size_x) + ' x ' + str(size_y) + ' score: ' + str(snake.score) + ' Death by : ' + snake.deathCause + '\n'             
                 highScore.write(score)
                 highScore.close()
                 continue 
