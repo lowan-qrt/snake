@@ -1,9 +1,6 @@
 # Snake
 Simple Snake game in shell.
 
-## Requirements
-pip install -r requirements.txt
-
 ## Installation
 1. Clone the repository to your local machine:
 ```bash
