@@ -4,17 +4,15 @@
 
 def displayGrid(n: int, m: int, snake: list, listOfItem) -> None:
     """
-    Generate the game grid.
-    
+    Generate the game grid.   
     Args:
-    n (int): X axe.
-    m (int): Y axe.
-    snake (list): The snake
+        n (int): X axe.
+        m (int): Y axe.
+        snake (list): The snake object.
+        apple (tuple): Coordinates of the apple.
     """
-    grid = ''
-    
-    for i in range(n):
-        for j in range(m):          
+    for i in range(m):
+        for j in range(n):
             if (j, i) in snake:
                 if (j, i) == snake[0]:
                     print('■', end='')   # print head

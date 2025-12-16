@@ -1,0 +1,11 @@
+Snake game rules (version with bombs)
+
+1.  The player controls a snake that moves continuously.
+2.  The snake grows with each piece of food it eats.
+3.  If the snake touches a wall or its own body, the game is
+  over.
+4.  Bombs appear randomly on the field.
+5.  A bomb disappears after a short delay if it has not exploded.
+6.  If the snake touches a bomb, the game is lost instantly.
+7.  The goal is to survive as long as possible and get the
+    highest score.

@@ -15,7 +15,7 @@ def occOfItem(array,value):
             cpt += 1
     return cpt
 
-def validInput(type,floor,ceil,message,default):   
+def validInput(type:str ,floor:int,ceil:int,message:str,default):   
     """
     Make an input errorless
 
