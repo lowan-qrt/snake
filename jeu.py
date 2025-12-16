@@ -6,10 +6,12 @@ import snake as sn
 import grid
 import item
 import usualFunction as f
+import menu
+
 import random
 import os
+import sys
 from playsound3 import playsound
-import menu
 import time
 
 if __name__ == "__main__":
@@ -30,6 +32,7 @@ if __name__ == "__main__":
         
     play = True
     while play:
+        f.hideCursor(False)
         play = menu.main()
 
         # Play the game
@@ -37,13 +40,15 @@ if __name__ == "__main__":
             try:
                 # Load or reload last scores
                 highScore = open('assets/highscore.txt', 'a')
-                    
-                # Set the grid
-                size_x = 10
-                size_y = 10
-                
-                
-                
+                  
+                #Set the gamemode
+                warped = f.validInput('int', 0, 1, 'Warped grid ? (Yes -> 1 / False -> 0)', 0)
+                movementMethod = f.validInput('int', 0, 3, 'Movement Method (with interuption -> 1 / without interuption -> 2)', 2)
+                  
+                # Set the grid      
+                size_x = f.validInput('int', 10, 24, '\nNumber of rows (min: 10 max: 24)', 10)
+                size_y = f.validInput('int', 10, 24, 'Number of columns (min: 10 max: 24)', 10)
+                              
                 # Initialize snake
                 snake = sn.Snake()
                 try:
@@ -51,17 +56,21 @@ if __name__ == "__main__":
                 except KeyboardInterrupt:
                     continue
                 snake.initializePos(size_x, size_y)
-                               
-                messageProbBomb = 'Enter the probability to generate a bomb when the snake eat an apple'
-                probBomb = f.validInput('int',0,100,messageProbBomb,10)
-
+                     
                 #Initialize items
                 listOfItem = []
-                
+                messageProbBomb = 'Enter the probability to generate a bomb when the snake eat an apple'
+                probBomb = f.validInput('int', 0, 100, messageProbBomb, 10)
+                      
                 apple = item.Item('apple','@')   
-                apple.itemPos(size_x,size_y,snake.coordinates,listOfItem)     
+                apple.itemPos(size_x, size_y, snake.coordinates, listOfItem)    
                 listOfItem.append(apple)
+                
                 scoreMultiplier = 1
+                
+                #Hide Cursor
+                if (os.name == 'nt'):
+                    f.hideCursor(True)
                 
                 #Run the game
                 running = True
@@ -81,31 +90,44 @@ if __name__ == "__main__":
                     # Eat Item
                     for itemOnGrid in listOfItem:
                         if(itemOnGrid.coordinates == snake.coordinates[0]):
-                            apple.itemPos(size_x,size_y,snake.coordinates,listOfItem) 
-                            snake.eat(itemOnGrid,scoreMultiplier)
+                            #Regeneration of the apple
+                            apple.itemPos(size_x, size_y, snake.coordinates, listOfItem) 
+                            #Apply item effect on the snake
+                            snake.eat(itemOnGrid, scoreMultiplier)
                 
-                            if((random.randint(probBomb,100) == 100)):
-                                listOfItem.append(item.Item('bomb','B'))
-                                listOfItem[-1].itemPos(size_x,size_y,snake.coordinates,listOfItem)
+                            #Randomly generate a bomb
+                            if((random.randint(probBomb,100) == 100)): 
+                                
+                                listOfItem.append(item.Item('bomb', 'B'))
+                                listOfItem[-1].itemPos(size_x, size_y, snake.coordinates, listOfItem)
+                            
+                            #Update grid to display generated item
                             os.system('cls')
                             grid.displayGrid(size_x, size_y, snake.coordinates,listOfItem)
                             print(f'\t// SCORE \\\\\n{snake.pseudo} : {snake.score} pts')
-                            
+                        
+                        #The more the bombs there are, the more the score multiplier is high
                         scoreMultiplier = 1 + f.occOfItem(listOfItem, 'bomb')/10
-                   
-
-                    
+                           
+                    #Speed of the game
                     time.sleep(0.1)
 
-
-
-                    os.system('cls')
-                    snake.move2(size_x, size_y)
+                    #Clear the CLI for better visibility of the game
+                    
+                    
+                    #Ask the snake to move
+                    match(movementMethod):
+                        case 1 :
+                            snake.move(size_x, size_y, warped)
+                            os.system('cls')
+                        case 2:
+                            snake.move2(size_x, size_y, warped)
+                            os.system('cls')
                
             except KeyboardInterrupt:
                 # Save scores
                 score = snake.pseudo + ': grid size: ' + str(size_x) + ' x ' + str(size_y) + ' score: ' + str(snake.score) + ' Death by : ' + snake.deathCause + '\n'             
-                highScore.write(score)
+
                 highScore.close()
                 continue 
 
@@ -113,3 +135,4 @@ if __name__ == "__main__":
         else:
             play == menu.quit()
     print('\n\n\tEND OF THE GAME\n')
+    f.hideCursor(False)

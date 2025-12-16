@@ -84,7 +84,7 @@ class Snake:
             
                 
  
-    def move(self, grid_x: int, grid_y: int) -> None:
+    def move(self, grid_x: int, grid_y: int, warped: bool) -> None:
         """
         Move the snake by using Z Q S D keys.
 
@@ -140,10 +140,10 @@ class Snake:
                 case _:
                     self.coordinates.insert(1, last_tail)
                     print('\n\Invalid movement!\n')
-            Snake.detectCollision(self, grid_x, grid_y)
+            Snake.detectCollision(self, grid_x, grid_y, warped)
             break
             
-    def move2(self, grid_x: int, grid_y: int) -> None:
+    def move2(self, grid_x: int, grid_y: int, warped: bool) -> None:
         """
         Move the snake by using Z Q S D keys.
 
@@ -208,10 +208,10 @@ class Snake:
                         self.coordinates.append(last_tail)
                 case _:
                     self.coordinates.insert(1, last_tail)
-            Snake.detectCollision(self, grid_x, grid_y)
+            Snake.detectCollision(self, grid_x, grid_y, warped)
             break
     
-    def detectCollision(self, grid_x: int, grid_y: int) -> None:
+    def detectCollision(self, grid_x: int, grid_y: int, warped: bool) -> None:
         """
         Detect wall and body collisions.
         
@@ -226,8 +226,7 @@ class Snake:
         # Wall collisions
         
         
-        warp = True
-        if(warp):
+        if(warped):
             if (self.coordinates[0][0] > grid_x - 1):
                 (self.coordinates[0]) = (0,self.coordinates[0][1])
                 

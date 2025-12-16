@@ -2,6 +2,22 @@
 # On December 2025
 # Helping functions
 
+def hideCursor(booleanValue):
+    """
+    Set up the visibility of the cursor
+    Args:
+        booleanValue : boolean
+    """
+    import ctypes   
+    class _CursorInfo(ctypes.Structure):
+        _fields_ = [("size", ctypes.c_int),
+                    ("visible", ctypes.c_byte)]
+    ci = _CursorInfo()
+    handle = ctypes.windll.kernel32.GetStdHandle(-11)
+    ctypes.windll.kernel32.GetConsoleCursorInfo(handle, ctypes.byref(ci))
+    ci.visible = booleanValue
+    ctypes.windll.kernel32.SetConsoleCursorInfo(handle, ctypes.byref(ci))
+
 def occOfItem(array,value):
     """
     Return the number of occurences of an item 
@@ -50,4 +66,4 @@ def validInput(type:str ,floor:int,ceil:int,message:str,default):
                 if floor <= len(value) <=ceil:
                     return value
                 else :
-                    print(f'Valid length, please,{floor}-{ceil}')
+                    print(f'Valid length, please, {floor}-{ceil}')
